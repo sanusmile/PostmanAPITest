@@ -4913,6 +4913,83 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create a new dataset Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/** Begin Adobe-provided Pre-Request Scripts **/",
+									"// Do not send HTTP Headers with empty variables, as Postman will send the literal variable name",
+									"pm.request.headers.each(header => {",
+									"    if (header.value.startsWith(\"{{\") && header.value.endsWith(\"}}\")) {",
+									"        if (!pm.variables.get(header.value.substring(2, header.value.length - 2))) { pm.request.headers.remove(header.key); }",
+									"    }",
+									"});",
+									"",
+									"// Do not send HTTP URL Query Parameters with empty variables, as Postman will send the literal variable name",
+									"pm.request.url.query.remove(q => { ",
+									"    if (q.value.startsWith(\"{{\") && q.value.endsWith(\"}}\")) {",
+									"        return !pm.variables.get(q.value.substring(2, q.value.length - 2));",
+									"    } ",
+									"});",
+									"/** End Adobe-provided Pre-Request Scripts **/"
+								],
+								"type": "text/javascript",
+								"id": "cd35feb6-60c1-4443-b6c0-5fd650045d8a"
+							}
+						}
+					],
+					"id": "ea2217c8-f0a1-43b2-a5b0-79c6f50e9e66",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"description": "The access token which can be copied from your Experience Platform integration, prefixed with \"Bearer\". For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{API_KEY}}",
+								"description": "The API key which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+							},
+							{
+								"key": "x-gw-ims-org-id",
+								"value": "{{IMS_ORG}}",
+								"description": "The Organization ID which can be copied from your Experience Platform integration. For more information on how to obtain this value, visit the [authentication tutorial](http://www.adobe.com/go/platform-api-authentication-en)."
+							},
+							{
+								"key": "x-sandbox-name",
+								"value": "{{SANDBOX_NAME}}",
+								"description": "The name of the sandbox in which the operation will take place. See the [sandboxes overview documentation](https://adobe.com/go/sandbox-overview-en) for more information."
+							},
+							{
+								"key": "accept-encoding",
+								"value": "{{accept-encoding}}",
+								"description": "Used to signal the intent to consume compressed response bodies. Supported encodings: gzip."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"<<Add Dataset Name>>\",\r\n    \"schemaRef\": {\r\n        \"id\": \"<<Add Schema ID that dataset linked to>>\",\r\n        \"contentType\": \"application/vnd.adobe.xed+json;version=1\"\r\n    }\r\n}"
+						},
+						"url": "https://platform.adobe.io/data/foundation/catalog/dataSets"
+					},
+					"response": []
 				}
 			],
 			"id": "08ec5c92-1256-40d5-b361-1eba410a8a41"
