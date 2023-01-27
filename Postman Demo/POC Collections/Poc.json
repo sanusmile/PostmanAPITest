@@ -5000,6 +5000,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
+						"id": "73ba2b0c-effe-4bd3-8296-1c465b1d46fe",
 						"exec": [
 							"/** Begin Adobe-provided Pre-Request Scripts **/",
 							"// Do not send HTTP Headers with empty variables, as Postman will send the literal variable name",
@@ -5017,8 +5018,7 @@
 							"});",
 							"/** End Adobe-provided Pre-Request Scripts **/"
 						],
-						"type": "text/javascript",
-						"id": "73ba2b0c-effe-4bd3-8296-1c465b1d46fe"
+						"type": "text/javascript"
 					}
 				}
 			],
